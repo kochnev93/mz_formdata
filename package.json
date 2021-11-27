@@ -1,0 +1,29 @@
+{
+  "name": "MZ_FormData",
+  "version": "1.0.0",
+  "description": "Collecting data from doctors",
+  "private": "true",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack serve --open"
+  },
+  "author": "kochnev93.ru",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "sass": "^1.39.2",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "-": "0.0.1",
+    "path": "^0.12.7"
+  }
+}

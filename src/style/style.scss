@@ -1,0 +1,110 @@
+*{
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+ul{
+    padding-left: 15px;
+}
+
+li{
+    margin-bottom: 10px;
+}
+
+form{
+    width: 500px;
+    margin: 0 auto;
+}
+
+label, input, select{
+    width: 100%;
+}
+
+label{
+    font-size: 14px;
+}
+
+input, select{
+    padding: 5px;
+    margin: 5px 0 15px 0;
+}
+
+input:focus{
+    border-color: #fc2193;
+}
+select:focus{
+    border-color: #fc2193;
+}
+
+input[type="submit"]{
+    background-color:#fc2193 ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+}
+
+h3{
+    margin: 0;
+}
+
+.form-item{
+    background-color: #f3f3f3;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+/* Образование*/
+
+.user-education__item:not(:last-child){
+    border-bottom: 2px dotted #fc2193;
+}
+
+
+/*Сертификаты*/
+
+.user-certificate__item:not(:last-child){
+    border-bottom: 2px dotted #fc2193;
+}
+
+
+/*Общее*/
+.delete-button{
+    background-color: transparent;
+    color: #fc2193;
+    border: none;
+    cursor: pointer;
+    padding: 0;  
+}
+
+.add-button{
+    background-color: #0dc6bf;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.list-item{
+    padding: 20px 0;
+}
+
+.list-item.item:first-child{
+    padding: 0 0 10px 0;
+}
+
+.item{
+    padding: 10px 0;
+}
+
+.item:last-child{
+    padding: 10px 0 0 0;
+}
+
+.item.hover input,
+.item.hover select{
+    background-color: #ffa8a8;
+}

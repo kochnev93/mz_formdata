@@ -1,5 +1,7 @@
 import "../style/style.scss";
 
+//import {addEducationItem} from "./addEducation.js";
+
 "use strict"
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -11,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Добавление пункта об образовании
     const addEducationItemBtn = document.querySelector('.user-education__btn');
-    addEducationItemBtn.addEventListener("click", addEducationItem);
+    addEducationItemBtn.addEventListener("click", addEducationItem );
 
     // Кнопка добавления сертификата
     const addCertificateItemBtn = document.querySelector('.user-certificate__btn');
@@ -20,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Кнопка добавления дополнительного образования
     const addAdditionalItemBtn = document.querySelector('.user-additional__btn');
     addAdditionalItemBtn.addEventListener("click", addAdditionalItem);
+
+    // Кнопка добавления скилла
+    const addSkillItemBtn = document.querySelector('.user-skill__btn');
+    addSkillItemBtn.addEventListener("click", addSkillItem);
 
     // Кнопки удаления
     let deleteEducationItemBtn;
@@ -44,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     };
-
 
     function addEducationItem(e){
         e.preventDefault();
@@ -86,7 +91,6 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteItem();
     };
 
-
     function deleteEducationItem(e){
         e.preventDefault();
         let deleteItem = e.target.closest('.user-education__item');
@@ -121,6 +125,8 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteCertificateItemBtn.forEach( item => {
             item.addEventListener("click", deleteCertificateItem);
         });
+
+        deleteItem();
     };
 
     function deleteCertificateItem(e){
@@ -148,6 +154,8 @@ document.addEventListener("DOMContentLoaded", function() {
         deleteAdditionalItemBtn.forEach( item => {
             item.addEventListener("click", deleteAdditionalItem);
         });
+
+        deleteItem();
     };
     
     function deleteAdditionalItem(e){
@@ -157,5 +165,33 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
 
+    function addSkillItem(e){
+        e.preventDefault();
+
+        let newItem = document.createElement('div');
+        newItem.classList.add('user-skill__item');
+        newItem.classList.add('item');
+        newItem.innerHTML = `                
+        <label>Название курса, семинара</label>
+        <input type="text" placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии">
+        <label>Название организации обучения или ФИО лектора</label>
+        <input type="text" placeholder="Например, А. Павлов">
+        <button class="skill-delete__btn delete-button">Удалить</button>`;
+        userSkillBox.appendChild(newItem);
+
+        // инициализируем кнопки закрытия и вешаем слушателя
+        deleteSkillItemBtn = document.querySelectorAll('.skill-delete__btn');
+        deleteSkillItemBtn.forEach( item => {
+            item.addEventListener("click", deleteSkillItem);
+        });
+
+        deleteItem();
+    };
+    
+    function deleteSkillItem(e){
+        e.preventDefault();
+        let deleteItem = e.target.closest('.user-skill__item');
+        userSkillBox.removeChild(deleteItem);
+    };
 
 });

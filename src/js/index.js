@@ -1,6 +1,5 @@
 import "../style/style.scss";
-
-//import {addEducationItem} from "./addEducation.js";
+import {validateForm} from "./validateForm.js";
 
 "use strict"
 
@@ -32,6 +31,13 @@ document.addEventListener("DOMContentLoaded", function() {
     let deleteCertificateItemBtn;
     let deleteAdditionalItemBtn;
     let deleteSkillItemBtn;
+
+    //Отправка формы - валидация
+    const $form = document.getElementById('datasite');
+    $form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        validateForm($form);   
+    });
 
 
     function deleteItem(e){

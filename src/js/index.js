@@ -4,6 +4,8 @@ import {validateForm} from "./validateForm.js";
 "use strict"
 
 document.addEventListener("DOMContentLoaded", function() {
+    const nowDate = new Date();
+
     // Контейнеры данных
     const userEducationBox = document.querySelector('.user-education__list');
     const userCertificateBox = document.querySelector('.user-certificate__list');
@@ -34,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Отправка формы - валидация
     const $form = document.getElementById('datasite');
+    //Устанавливаем максимальный год окончания университета
+    $form.user_education_yearEnd.setAttribute('max', nowDate.getFullYear() + 1);
+    //Submit
     $form.addEventListener('submit', function(e) {
         e.preventDefault();
         validateForm($form);   
@@ -65,18 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {
         newItem.classList.add('item');
         newItem.innerHTML = `                
         <label>Год окончания:</label>
-        <input type="number" name="user-education-yearEnd" min="1950" max="2025" placeholder="Например, 2020" required>
+        <input type="number" name="user_education_yearEnd" max = ${nowDate.getFullYear() + 1} placeholder="2020" required>
         <label>Уровень подготовки:</label>
-        <select name="user-education-speciality">
+        <select name="user_education_degree">
             <option value="Диплом">Диплом</option>
             <option value="Интернатура">Интернатура</option>
             <option value="Ординатура">Ординатура</option>
             <option value="Профессиональная переподготовка">Профессиональная переподготовка</option>
         </select>
         <label>Университет:</label>
-        <input type="text" name="user-education-university" placeholder="Например, Санкт-Петербургский государственный медицинский университет" required>
+        <input type="text" name="user_education_university" placeholder="Например, Санкт-Петербургский государственный медицинский университет" required>
         <label>Специальность:</label>
-        <select name="user-education-speciality">
+        <select name="user_education_speciality">
             <option value="Стоматология">Стоматология</option>
             <option value="Стоматология общей практики">Стоматология общей практики</option>
             <option value="Стоматология терапевтическая">Стоматология терапевтическая</option>

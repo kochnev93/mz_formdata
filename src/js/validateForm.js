@@ -76,7 +76,7 @@ export function validateForm(form){
         // Проверяем на наличие слов "Университет / Академия" в ответе
         if( str.toLowerCase().indexOf('университет') !== -1
             || str.toLowerCase().indexOf('колледж') !== -1
-            || str.toLowerCase().indexOf('институт') !== -1  ){
+            || str.toLowerCase().indexOf('институт') !== -1 ){
             return str
                 .replaceAll('ий', 'ого')
                 .replaceAll('ой', 'ого')

@@ -36,13 +36,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Отправка формы - валидация
     const $form = document.getElementById('datasite');
-    //Устанавливаем максимальный год окончания университета
+    //Устанавливаем валидацию дат в форме
     $form.user_education_yearEnd.setAttribute('max', nowDate.getFullYear() + 1);
+    $form.user_certificate_yearBegin.setAttribute('min', getAttrDate(nowDate, -5));
+    $form.user_certificate_yearBegin.setAttribute('max', getAttrDate(nowDate, 0));
+    $form.user_certificate_yearEnd.setAttribute('min', getAttrDate(nowDate, 0));
+    $form.user_certificate_yearEnd.setAttribute('max', getAttrDate(nowDate, 5));
+
     //Submit
     $form.addEventListener('submit', function(e) {
         e.preventDefault();
         validateForm($form);   
     });
+
+    function getAttrDate(nowdate, year){
+        if(nowDate.getDate().toString().length === 2){
+            return `${nowDate.getFullYear() + year}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`;
+        }
+
+        return `${nowDate.getFullYear() + year}-${nowDate.getMonth() + 1}-0${nowDate.getDate()}`;
+    }
 
 
     function deleteItem(e){
@@ -116,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
         newItem.classList.add('item');
         newItem.innerHTML = `                
         <label>Специальность:</label>
-        <select name="user-education-speciality">
+        <select name="user-certificate-speciality">
             <option value="Стоматология">Стоматология</option>
             <option value="Стоматология общей практики">Стоматология общей практики</option>
             <option value="Стоматология ортопедическая">Стоматология ортопедическая</option>
@@ -125,9 +138,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <option value="Ортодонтия">Ортодонтия</option>
         </select>
         <label>Выдан:</label>
-        <input type="date" required>
+        <input type="date" name="user_certificate_yearBegin" required min="${getAttrDate(nowDate, -5)}" max="${getAttrDate(nowDate, 0)}">
         <label>Действителен до:</label>
-        <input type="date"required>
+        <input type="date" name="user_certificate_yearEnd" required min="${getAttrDate(nowDate, 0)}" max="${getAttrDate(nowDate, 5)}">
         <button class="certificate-delete__btn delete-button">Удалить</button>`;
         userCertificateBox.appendChild(newItem);
 

@@ -19,8 +19,15 @@ form {
 
 label,
 input,
-select {
+select,
+textarea {
+  padding: 5px;
   width: 100%;
+}
+
+textarea{
+  min-height: 200px;
+  resize: vertical;
 }
 
 label {
@@ -29,7 +36,6 @@ label {
 
 input,
 select {
-  padding: 5px;
   margin: 5px 0 15px 0;
 }
 .user-fio input{
@@ -92,10 +98,6 @@ h3 {
   border-radius: 5px;
 }
 
-.list-item {
-  //padding: 20px 0;
-}
-
 .list-item.item:first-child {
   padding: 0 0 10px 0;
 }
@@ -104,9 +106,14 @@ h3 {
   padding: 20px 0;
 }
 
-.item:last-child {
-  padding: 20px 0 0 0;
+.user-fio .item{
+  padding: 0;
 }
+
+.item.error{
+  background-color: #f7dfdf;
+}
+
 
 .item.hover input,
 .item.hover select {
@@ -126,4 +133,9 @@ h3 {
   padding-left: 10px;
   border-left: 2px solid red;
   line-height: 1.5;
+}
+
+.form-example{
+  font-size: 12px;
+  color: #818181;
 }

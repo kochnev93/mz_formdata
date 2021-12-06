@@ -2,9 +2,13 @@ export function validateForm(form){
     // Объект в который упаковываем данные
     let formData = {
         name: null,
-        education: []
+        education: [],
+        certificate: []
     };
     const result = document.getElementById('root');
+    // Счетчик ошибок
+    let errorCount = makeCounter();
+
 
     // Удаляем сообщения об ошибках
     const errorMessage = document.querySelectorAll('.error-message');
@@ -23,8 +27,9 @@ export function validateForm(form){
     if( checkName(userName.value) ){
         formData.name = userName.value;
     } else {
+        errorCount();
         let message = "Недопустимое имя. Убедитесь, что имя заполнено согласно образцу";
-        createErrorMessage(userName, message);
+        createErrorMessage(userName.parentNode.parentNode, message);
     }
 
     //Проверяем Образование
@@ -39,8 +44,6 @@ export function validateForm(form){
 
         univerDeclination(university);
 
-
-
         switch(degree){
             case 'Диплом':
                 str = `${yearEnd} г. &mdash; ${university}, специальность «${speciality}».`;
@@ -54,12 +57,38 @@ export function validateForm(form){
 
     });
 
+
+    // Проверяем сертификаты
+    const certificateItem = document.querySelectorAll('.user-certificate__item');
+    certificateItem.forEach( item => {
+        let certificateName = item.querySelector('[name=user-certificate-speciality]').value;
+        let certificateBegin = item.querySelector('[name=user_certificate_yearBegin]').value;
+        let certificateEnd = item.querySelector('[name=user_certificate_yearEnd]').value;
+
+        let now = new Date();
+        let start = new Date(certificateBegin);
+        let end = new Date(certificateEnd);
+        let str;
+
+        if(end.getFullYear() - start.getFullYear() === 5
+            && end.getDate() === start.getDate() 
+            && end.getMonth() === start.getMonth()){
+                str = `Сертификат по специальности «${certificateName}». Выдан ${start.getDate()}.${start.getMonth() + 1}.${start.getFullYear()} г. Действителен до ${end.getDate()}.${end.getMonth() + 1}.${end.getFullYear()} г.`;
+                formData.certificate.push(str);
+        } else {
+            errorCount();
+            let message = "Ошибка. Срок действия сертификата 5 лет";
+            createErrorMessage(item, message);
+        }
+
+    });
+
     function createErrorMessage(element, message){
-        element.parentNode.classList.add('error');
+        element.classList.add('error');
         let error = document.createElement('p');
         error.classList.add('error-message');
         error.innerHTML = message;
-        element.parentNode.appendChild(error);
+        element.appendChild(error);
     };
 
     function checkName (name){
@@ -97,7 +126,21 @@ export function validateForm(form){
         }
     }
 
+    function makeCounter(){
+        let count = 0;
+        return function() {
+            return ++count;
+        }
+    }
+
     //test
-    result.innerHTML = JSON.stringify(formData);
+    if(errorCount() === 1){
+        /*Send form*/
+        document.querySelector('.result-test').innerHTML = 'Ошибок нет';
+        result.innerHTML = JSON.stringify(formData);
+    } else{
+        document.querySelector('.result-test').innerHTML = 'Исправьте ошибки';
+    }
+    
 
 }

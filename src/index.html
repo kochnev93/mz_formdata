@@ -129,9 +129,10 @@
             <input
               type="text"
               placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии"
+              name ="user_additional_title"
             />
             <label>Название организации обучения или ФИО лектора</label>
-            <input type="text" placeholder="Например, А. Павлов" />
+            <input type="text" placeholder="Например, А. Павлов" name ="user_additional_author"/>
           </div>
         </div>
         <button class="user-additional__btn add-button">Добавить еще</button>
@@ -154,7 +155,7 @@
 
         <div class="user-skill__list list-item">
           <div class="user-skill__item item">
-            <textarea></textarea>
+            <textarea name="user_skill"></textarea>
           </div>
         </div>
         <button class="user-skill__btn add-button">Добавить еще</button>
@@ -178,7 +179,9 @@
           </ul>
         </div>
 
-        <input type="file" />
+        <input type="file" name="user_photo">
+
+        <div class="photo_preview"></div>
       </div>
 
       <input type="submit" value="Отправить" />

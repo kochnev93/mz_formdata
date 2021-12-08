@@ -1,10 +1,5 @@
 export function validateForm(form){
-    // Объект в который упаковываем данные
-    let formData = {
-        name: null,
-        education: [],
-        certificate: []
-    };
+    let formData = new FormData();
     const result = document.getElementById('root');
     // Счетчик ошибок
     let errorCount = makeCounter();
@@ -25,7 +20,7 @@ export function validateForm(form){
     // Проверяем ФИО
     const userName = form.user_name;
     if( checkName(userName.value) ){
-        formData.name = userName.value;
+        formData.append('name', userName.value);
     } else {
         errorCount();
         let message = "Недопустимое имя. Убедитесь, что имя заполнено согласно образцу";
@@ -34,6 +29,7 @@ export function validateForm(form){
 
     //Проверяем Образование
     const educationItem = document.querySelectorAll('.user-education__item');
+    let education = [];
     educationItem.forEach( item => {
         //Данные об образовании
         let yearEnd = item.querySelector('[name=user_education_yearEnd]').value;
@@ -42,30 +38,32 @@ export function validateForm(form){
         let degree = item.querySelector('[name=user_education_degree]').value;
         let str; // записываем конечный вариант записи
 
-        univerDeclination(university);
-
         switch(degree){
             case 'Диплом':
                 str = `${yearEnd} г. &mdash; ${university}, специальность «${speciality}».`;
-                formData.education.push(str);
+                education.push(str);
                 break;
             default:
                 str = `${yearEnd} г. &mdash; ${degree} на базе ${univerDeclination(university)}, специальность «${speciality}».`;
-                formData.education.push(str);
+                education.push(str);
                 break;
         }
 
     });
 
+    // Записываем данные об образовании
+    formData.append('education', education);
+
+
 
     // Проверяем сертификаты
     const certificateItem = document.querySelectorAll('.user-certificate__item');
+    let certificate = [];
     certificateItem.forEach( item => {
         let certificateName = item.querySelector('[name=user-certificate-speciality]').value;
         let certificateBegin = item.querySelector('[name=user_certificate_yearBegin]').value;
         let certificateEnd = item.querySelector('[name=user_certificate_yearEnd]').value;
 
-        let now = new Date();
         let start = new Date(certificateBegin);
         let end = new Date(certificateEnd);
         let str;
@@ -74,7 +72,7 @@ export function validateForm(form){
             && end.getDate() === start.getDate() 
             && end.getMonth() === start.getMonth()){
                 str = `Сертификат по специальности «${certificateName}». Выдан ${start.getDate()}.${start.getMonth() + 1}.${start.getFullYear()} г. Действителен до ${end.getDate()}.${end.getMonth() + 1}.${end.getFullYear()} г.`;
-                formData.certificate.push(str);
+                certificate.push(str);
         } else {
             errorCount();
             let message = "Ошибка. Срок действия сертификата 5 лет";
@@ -83,6 +81,44 @@ export function validateForm(form){
 
     });
 
+    // Записываем данные о сертификатах
+    formData.append('certificate', certificate);
+
+
+    // Проверяем доп. образование
+    const additionalItem = document.querySelectorAll('.user-additional__item');
+    let additional = [];
+
+    additionalItem.forEach( item => {
+        let additionalTitle = item.querySelector('[name=user_additional_title]').value;
+        let additionalAuthor = item.querySelector('[name=user_additional_author]').value;
+
+        if(additionalTitle.length !== 0){
+            if(additionalAuthor.length !== 0){
+                additional.push(`&mdash; «${additionalTitle.trim()}», ${additionalAuthor.trim()}.`);
+            } else{
+                additional.push(`&mdash; «${additionalTitle.trim()}».`);
+            }
+        }
+    });
+     // Записываем данные о доп. образовании
+     formData.append('additional', additional);
+
+
+    // Проверяем ключевые навыки
+    const skills = document.querySelector('[name=user_skill]').value;
+    // Записываем данные о ключевых навыках
+    formData.append('skill', skills.trim());
+
+
+    // Проверяем фото
+    const photo = form.user_photo;
+    if( checkPhoto(photo) ){
+        formData.append('photo', photo.files[0])
+    }
+    
+
+    // Функции
     function createErrorMessage(element, message){
         element.classList.add('error');
         let error = document.createElement('p');
@@ -133,14 +169,54 @@ export function validateForm(form){
         }
     }
 
+    function checkPhoto(photo){
+        const file = photo.files[0];
+    
+        const validExtension = ['jpg', 'jpeg', 'png'];
+        const fileSize = file.size/1024/1024; //Mb
+        const fileExt = file.name.split('.').pop().toLowerCase();
+    
+        if(fileSize > 5){
+            errorCount();
+            let message = "Размер файла не должен превышать 5 Мб";
+            createErrorMessage(photo.parentNode, message);
+            return false;
+        };
+    
+        if( !validExtension.includes(fileExt) ){
+            errorCount();
+            let message = "Неверное расширение файла. Загрузите фото с расширением jpg, jpeg, png";
+            createErrorMessage(photo.parentNode, message);
+            return false;
+        }
+
+        // Выводим превью фото
+        let reader = new FileReader();
+        reader.onload = function(e){
+            document.querySelector('.photo_preview').innerHTML = `<img src="${e.target.result}">`;
+        };
+        reader.readAsDataURL(file);
+
+        return true;
+    }
+
+    console.log(formData);
+
     //test
     if(errorCount() === 1){
         /*Send form*/
+
+        // test
         document.querySelector('.result-test').innerHTML = 'Ошибок нет';
-        result.innerHTML = JSON.stringify(formData);
+        result.innerHTML = `
+        ${formData.get('name')}
+        ${formData.get('education')}
+        ${formData.get('certificate')}
+        ${formData.get('additional')}
+        ${formData.get('skill')}
+        ${formData.get('photo')}`;
     } else{
         document.querySelector('.result-test').innerHTML = 'Исправьте ошибки';
     }
     
-
 }

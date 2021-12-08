@@ -1,1 +1,193 @@
-<!doctype html><html lang="ru"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="stylesheet" href="style.css"/><title>Form for Site</title><script defer="defer" src="bundle.js"></script></head><body><form id="datasite"><h3>Уважаемые сотрудники!</h3><p>Необходимо заполнить все обязательные поля согласно описанию</p><div class="user-fio form-item"><h3>Фамилия Имя Отчество</h3><div class="user-fio__item item"><input name="user_name" placeholder="Иванов Иван Иванович" required/></div></div><div class="user-education form-item"><h3>Образование</h3><div class="form-info">Заполните все поля об образовании. Название университета в им. падеже без сокращений, например <u>Первый Санкт-Петербургский государственный медицинский университет им. И.П. Павлова</u>. Чтобы добавить еще один пункт, нажмите кнопку "Добавить еще".</div><div class="user-education__list list-item"><div class="user-education__item item"><label>Год окончания:</label> <input type="number" name="user_education_yearEnd" placeholder="2020" required/> <label>Уровень подготовки:</label> <select name="user_education_degree"><option value="Диплом">Диплом</option><option value="Интернатура">Интернатура</option><option value="Ординатура">Ординатура</option><option value="Профессиональная переподготовка">Профессиональная переподготовка</option></select> <label>Университет:</label> <input name="user_education_university" placeholder="Санкт-Петербургский государственный медицинский университет" required/> <label>Специальность:</label> <select name="user_education_speciality"><option value="Стоматология">Стоматология</option><option value="Стоматология общей практики">Стоматология общей практики</option><option value="Стоматология ортопедическая">Стоматология ортопедическая</option><option value="Стоматология хирургическая">Стоматология хирургическая</option><option value="Стоматология детская">Стоматология детская</option><option value="Ортодонтия">Ортодонтия</option></select></div></div><button class="user-education__btn add-button">Добавить еще</button></div><div class="user-certificate form-item"><h3>Действующие сертификаты</h3><div class="form-info">Заполните данные о сертификате. Чтобы добавить еще один сертификат, нажмите кнопку "Добавить еще".</div><div class="user-certificate__list list-item"><div class="user-certificate__item item"><label>Специальность:</label> <select name="user-certificate-speciality"><option value="Стоматология">Стоматология</option><option value="Стоматология общей практики">Стоматология общей практики</option><option value="Стоматология терапевтическая">Стоматология терапевтическая</option><option value="Стоматология ортопедическая">Стоматология ортопедическая</option><option value="Стоматология хирургическая">Стоматология хирургическая</option><option value="Стоматология детская">Стоматология детская</option><option value="Ортодонтия">Ортодонтия</option></select> <label>Выдан:</label> <input type="date" name="user_certificate_yearBegin" required/> <label>Действителен до:</label> <input type="date" name="user_certificate_yearEnd" required/></div></div><button class="user-certificate__btn add-button">Добавить еще</button></div><div class="user-additional form-item"><h3>Дополнительное образование</h3><div class="form-info">Заполните данные о дополнительном образовании. В первой строке укажите название курса, например <u>Эндодонтия №1. Практические нюансы каждодневной эндодонтии</u>, во второй название организации или лектора, кто проводил курс, например <u>А. Павлов</u></div><div class="user-additional__list list-item"><div class="user-additional__item item"><label>Название курса, семинара</label> <input placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии"/> <label>Название организации обучения или ФИО лектора</label> <input placeholder="Например, А. Павлов"/></div></div><button class="user-additional__btn add-button">Добавить еще</button></div><div class="user-skill form-item"><h3>Ключевые навыки</h3><div class="form-info">Заполните данные о ключевых навыках.</div><div class="form-example"><br/>Пример:<br/>Диагностика, профилактика, лечение кариеса и его осложненных форм. Реставрация всех групп зубов современными пломбировочными материалами. Эндодонтическое лечение корневых каналов ручным методом и с использованием машинных инструментов, пломбирование корневых каналов методом латеральной конденсации.</div><div class="user-skill__list list-item"><div class="user-skill__item item"><textarea></textarea></div></div><button class="user-skill__btn add-button">Добавить еще</button></div><div class="user-photo form-item"><h3>Фотография</h3><div class="form-info">Загрузите свою Фотографию. Фотография будет размещена на официальном сайте и в мобильном приложении, поэтому оно должно соответсвовать следующим требованиям:<ul><li>На фото Вы должны быть в медицинской одежде</li><li>Улыбка и дружелюбное выражение лица</li><li>На втором плане должны отсутствовать посторонние предметы (батарея, окно, жалюзи, стол, компьютер и т.д.)</li><li>НЕ СЕЛФИ</li><li>Хорошее качество</li></ul></div><input type="file"/></div><input type="submit" value="Отправить"/><div class="result-test"></div></form><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Form for Site</title>
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <form id="datasite">
+      <h3>Уважаемые сотрудники!</h3>
+      <p>Необходимо заполнить все обязательные поля согласно описанию</p>
+
+      <div class="user-fio form-item">
+        <h3>Фамилия Имя Отчество</h3>
+        <div class="user-fio__item item">
+          <input
+            type="text"
+            name="user_name"
+            placeholder="Иванов Иван Иванович"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="user-education form-item">
+        <h3>Образование</h3>
+        <div class="form-info">
+          Заполните все поля об образовании. Название университета в им. падеже
+          без сокращений, например
+          <u
+            >Первый Санкт-Петербургский государственный медицинский университет
+            им. И.П. Павлова</u
+          >. Чтобы добавить еще один пункт, нажмите кнопку "Добавить еще".
+        </div>
+        <div class="user-education__list list-item">
+          <div class="user-education__item item">
+            <label>Год окончания:</label>
+            <input
+              type="number"
+              name="user_education_yearEnd"
+              placeholder="2020"
+              required
+            />
+            <label>Уровень подготовки:</label>
+            <select name="user_education_degree">
+              <option value="Диплом">Диплом</option>
+              <option value="Интернатура">Интернатура</option>
+              <option value="Ординатура">Ординатура</option>
+              <option value="Профессиональная переподготовка">
+                Профессиональная переподготовка
+              </option>
+            </select>
+            <label>Университет:</label>
+            <input
+              type="text"
+              name="user_education_university"
+              placeholder="Санкт-Петербургский государственный медицинский университет"
+              required
+            />
+            <label>Специальность:</label>
+            <select name="user_education_speciality">
+              <option value="Стоматология">Стоматология</option>
+              <option value="Стоматология общей практики">
+                Стоматология общей практики
+              </option>
+              <option value="Стоматология ортопедическая">
+                Стоматология ортопедическая
+              </option>
+              <option value="Стоматология хирургическая">
+                Стоматология хирургическая
+              </option>
+              <option value="Стоматология детская">Стоматология детская</option>
+              <option value="Ортодонтия">Ортодонтия</option>
+            </select>
+          </div>
+        </div>
+        <button class="user-education__btn add-button">Добавить еще</button>
+      </div>
+      <div class="user-certificate form-item">
+        <h3>Действующие сертификаты</h3>
+        <div class="form-info">
+          Заполните данные о сертификате. Чтобы добавить еще один сертификат,
+          нажмите кнопку "Добавить еще".
+        </div>
+        <div class="user-certificate__list list-item">
+          <div class="user-certificate__item item">
+            <label>Специальность:</label>
+            <select name="user-certificate-speciality">
+              <option value="Стоматология">Стоматология</option>
+              <option value="Стоматология общей практики">
+                Стоматология общей практики
+              </option>
+              <option value="Стоматология терапевтическая">
+                Стоматология терапевтическая
+              </option>
+              <option value="Стоматология ортопедическая">
+                Стоматология ортопедическая
+              </option>
+              <option value="Стоматология хирургическая">
+                Стоматология хирургическая
+              </option>
+              <option value="Стоматология детская">Стоматология детская</option>
+              <option value="Ортодонтия">Ортодонтия</option>
+            </select>
+            <label>Выдан:</label>
+            <input type="date" name="user_certificate_yearBegin" required />
+            <label>Действителен до:</label>
+            <input type="date" name="user_certificate_yearEnd" required />
+          </div>
+        </div>
+
+        <button class="user-certificate__btn add-button">Добавить еще</button>
+      </div>
+
+      <div class="user-additional form-item">
+        <h3>Дополнительное образование</h3>
+        <div class="form-info">
+          Заполните данные о дополнительном образовании. В первой строке укажите
+          название курса, например
+          <u>Эндодонтия №1. Практические нюансы каждодневной эндодонтии</u>, во
+          второй название организации или лектора, кто проводил курс, например
+          <u>А. Павлов</u>
+        </div>
+        <div class="user-additional__list list-item">
+          <div class="user-additional__item item">
+            <label>Название курса, семинара</label>
+            <input
+              type="text"
+              placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии"
+              name ="user_additional_title"
+            />
+            <label>Название организации обучения или ФИО лектора</label>
+            <input type="text" placeholder="Например, А. Павлов" name ="user_additional_author"/>
+          </div>
+        </div>
+        <button class="user-additional__btn add-button">Добавить еще</button>
+      </div>
+
+      <div class="user-skill form-item">
+        <h3>Ключевые навыки</h3>
+        <div class="form-info">Заполните данные о ключевых навыках.</div>
+
+        <div class="form-example">
+          <br />
+          Пример:
+          <br />
+          Диагностика, профилактика, лечение кариеса и его осложненных форм.
+          Реставрация всех групп зубов современными пломбировочными материалами.
+          Эндодонтическое лечение корневых каналов ручным методом и с
+          использованием машинных инструментов, пломбирование корневых каналов
+          методом латеральной конденсации.
+        </div>
+
+        <div class="user-skill__list list-item">
+          <div class="user-skill__item item">
+            <textarea name="user_skill"></textarea>
+          </div>
+        </div>
+        <button class="user-skill__btn add-button">Добавить еще</button>
+      </div>
+
+      <div class="user-photo form-item">
+        <h3>Фотография</h3>
+        <div class="form-info">
+          Загрузите свою Фотографию. Фотография будет размещена на официальном
+          сайте и в мобильном приложении, поэтому оно должно соответсвовать
+          следующим требованиям:
+          <ul>
+            <li>На фото Вы должны быть в медицинской одежде</li>
+            <li>Улыбка и дружелюбное выражение лица</li>
+            <li>
+              На втором плане должны отсутствовать посторонние предметы
+              (батарея, окно, жалюзи, стол, компьютер и т.д.)
+            </li>
+            <li>НЕ СЕЛФИ</li>
+            <li>Хорошее качество</li>
+          </ul>
+        </div>
+
+        <input type="file" name="user_photo">
+
+        <div class="photo_preview"></div>
+      </div>
+
+      <input type="submit" value="Отправить" />
+      <div class="result-test"></div>
+    </form>
+
+    <div id="root"></div>
+  </body>
+</html>

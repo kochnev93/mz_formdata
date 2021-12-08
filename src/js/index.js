@@ -167,9 +167,13 @@ document.addEventListener("DOMContentLoaded", function() {
         newItem.classList.add('item');
         newItem.innerHTML = `                
         <label>Название курса, семинара</label>
-        <input type="text" placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии">
+        <input
+          type="text"
+          placeholder="Эндодонтия №1. Практические нюансы каждодневной эндодонтии"
+          name ="user_additional_title"
+        />
         <label>Название организации обучения или ФИО лектора</label>
-        <input type="text" placeholder="Например, А. Павлов">
+        <input type="text" placeholder="Например, А. Павлов" name ="user_additional_author"/>
         <button class="additional-delete__btn delete-button">Удалить</button>`;
         userAdditionalBox.appendChild(newItem);
 

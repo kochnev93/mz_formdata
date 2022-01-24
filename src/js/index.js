@@ -49,6 +49,22 @@ document.addEventListener("DOMContentLoaded", function() {
         validateForm($form);   
     });
 
+    //Превью фотографии
+    let reader = new FileReader();
+
+    reader.onload = function(e){
+        document.querySelector('.photo_preview').innerHTML = `<img src="${e.target.result}">`;
+    };
+
+    $form.user_photo.addEventListener("change", loadImageFile);
+
+
+    function loadImageFile() {
+        var file = $form.user_photo.files[0];
+        reader.readAsDataURL(file);
+    }
+
+
     function getAttrDate(nowdate, year){
         if(nowDate.getDate().toString().length === 2){
             return `${nowDate.getFullYear() + year}-${nowDate.getMonth() + 1}-${nowDate.getDate()}`;

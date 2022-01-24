@@ -1,65 +1,62 @@
+#datasite {
+  width: 500px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  box-sizing: border-box;
 
-ul {
-  padding-left: 15px;
-}
-
-* {
-    font-family: sans-serif;
+  label,
+  input,
+  select,
+  textarea {
+    padding: 5px;
+    width: 100%;
     box-sizing: border-box;
   }
 
-li {
-  margin-bottom: 10px;
-}
+  ul {
+    padding-left: 15px;
+  }
 
-form {
-  width: 500px;
-  margin: 0 auto;
-}
+  li {
+    margin-bottom: 10px;
+  }
 
-label,
-input,
-select,
-textarea {
-  padding: 5px;
-  width: 100%;
-}
+  textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
 
-textarea{
-  min-height: 200px;
-  resize: vertical;
-}
+  label {
+    font-size: 14px;
+  }
 
-label {
-  font-size: 14px;
-}
-
-input,
-select {
-  margin: 5px 0 15px 0;
-}
-.user-fio input{
+  input,
+  select {
+    margin: 5px 0 15px 0;
+  }
+  .user-fio input {
     margin: 5px 0 0 0;
-}
+  }
 
-input:focus {
-  border-color: #fc2193;
-}
-select:focus {
-  border-color: #fc2193;
-}
+  input:focus {
+    border-color: #fc2193;
+  }
+  select:focus {
+    border-color: #fc2193;
+  }
 
-input[type="submit"] {
-  background-color: #fc2193;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 50%;
-}
+  input[type="submit"] {
+    background-color: #fc2193;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 50%;
+  }
 
-h3 {
-  margin: 0 0 15px 0;
+  h3 {
+    margin: 0 0 15px 0;
+  }
 }
 
 .form-item {
@@ -71,7 +68,6 @@ h3 {
 .form-item.error {
   background-color: #f7dfdf;
 }
-
 
 .user-education__item:not(:last-child),
 .user-certificate__item:not(:last-child),
@@ -106,27 +102,26 @@ h3 {
   padding: 20px 0;
 }
 
-.user-fio .item{
+.user-fio .item {
   padding: 0;
 }
 
-.item.error{
+.item.error {
   background-color: #f7dfdf;
 }
-
 
 .item.hover input,
 .item.hover select {
   background-color: #ffa8a8;
 }
 
-.error-message{
+.error-message {
   font-size: 12px;
   color: red;
   margin-bottom: 0;
 }
 
-.form-info{
+.form-info {
   color: black;
   font-size: 12px;
   font-weight: bold;
@@ -135,11 +130,11 @@ h3 {
   line-height: 1.5;
 }
 
-.form-example{
+.form-example {
   font-size: 12px;
   color: #818181;
 }
 
-.photo_preview img{
+.photo_preview img {
   width: 150px;
 }

@@ -190,12 +190,12 @@ export function validateForm(form){
             return false;
         }
 
-        // Выводим превью фото
-        let reader = new FileReader();
-        reader.onload = function(e){
-            document.querySelector('.photo_preview').innerHTML = `<img src="${e.target.result}">`;
-        };
-        reader.readAsDataURL(file);
+        // // Выводим превью фото
+        // let reader = new FileReader();
+        // reader.onload = function(e){
+        //     document.querySelector('.photo_preview').innerHTML = `<img src="${e.target.result}">`;
+        // };
+        // reader.readAsDataURL(file);
 
         return true;
     }
